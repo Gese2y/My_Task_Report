@@ -135,9 +135,10 @@ throw new Error('Method not implemented.');
       this.Org = this.Org.filter((value)=>
       value.organization_code !='3d26a10c-9be9-4261-bf97-ab6f39455ed3'&&
       value.organization_code !='275619f2-69c2-4fb7-a053-938f0b62b088'&&
-      value.organization_code !='1efb0336-26c6-4bf1-aeb8-8da0d4f7dbbb'&&
+      // value.organization_code !='1efb0336-26c6-4bf1-aeb8-8da0d4f7dbbb'&&
       value.organization_code !='5ef1475c-2b66-4087-b1b7-63e6c6cd7ca1'&&
       value.organization_code !='1809e356-d00f-42f9-8425-41a149dfd60f');
+      
     
 
       console.log("this.Org", this.Org);
