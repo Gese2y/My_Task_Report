@@ -1,0 +1,170 @@
+<app-loading-bar *ngIf="loadingBarService.loadingBarSubject | async"></app-loading-bar>
+<div #screen  style="width: 100%; margin: 5% auto; box-shadow: 0 10px 50px rgba(0, 0, 0, 0.2);" [style.zoom]="defaultZoomLevel" >
+  
+    <div class="card-header card-title" style="text-align: center; font-weight: bold;">
+      <!-- <img width="100px" height="100px" src="{{Logo}}" /> -->
+      <h4 class="card-title" style="text-align: center;" translate>My Task Report </h4>
+    </div>
+    <div><div>  <br>
+      
+      <div class="">
+        <div class="container rounded border-5 border border-success">
+
+          <div >
+           <br> 
+           <div class="row gx-3 gy-2">
+             <!-- Subcity and Role Name -->
+             <div class="col-sm-3">
+               <label for="Subcity">Subcity *</label>
+               <select required class="form-control" [(ngModel)]="Form.subcity" name="Subcity" id="Subcity" (change)="passSubcity($event.target.value)">
+                 <ng-container *ngFor="let Org of Org">
+                   <option [value]="Org.organization_code">
+                     {{ language === 'amharic' ? Org.name_am : Org.name_am }}
+                   </option>
+                 </ng-container>
+               </select>
+             </div>
+             <div class="col-sm-3">
+               <label for="RoleName">Role Name *</label>
+               <select required class="form-control" [(ngModel)]="Form.Role_Name" name="Role_Name" id="Role_Name" (change)="passRole_Name($event.target.value)">
+                 <ng-container *ngFor="let role of RoleName">
+                   <option [value]="role.roleName">
+                     {{ language === 'amharic' ? role.roleName : role.roleName }}
+                   </option>
+                 </ng-container>
+               </select></div>
+           </div>
+           
+           <div class="row gx-3 gy-2">
+             <!-- Start Date and End Date -->
+             <div class="col-sm-3">
+               <label for="StartDate">Start Date *</label>
+               <input required type="date" class="form-control" name="StartDate" id="StartDate" [(ngModel)]="Form.start_Date">
+             </div>
+             <div class="col-sm-3">
+               <label for="EndDate">End Date *</label>
+               <input type="date" class="form-control" name="EndDate" id="EndDate" [(ngModel)]="Form.end_date">
+             </div>
+             <div class="col-sm-3">
+               <button  type="button" (click)="getMyTaskReport()" class="btn btn-primary">View Report</button>
+             </div>
+           </div>
+           
+           <div class="row gx-3 gy-2">
+            
+           </div>
+           
+           <br>
+         </div>
+        </div></div> <br>
+      <div style="overflow-x: auto;">
+      </div>
+      <table id="data-table" #dataTable style="overflow: auto; border: 2px solid black;" class="table text-center table-bordered">
+        <thead style="background-color: #ADD8E6; color: black; font-weight: bold;">
+          <tr>
+            <th translate>Full Name</th>
+            <th translate>User Name</th>
+            <th translate>Sent to Citizen</th>
+            <th translate>Sent central Information manager</th>
+            <th translate>Sent central Document verifier</th>
+            <th translate>Sent central Technical officer</th>
+            <th translate>Sent central Team leader</th>
+            <th translate>Sent central Basemap officer</th>
+            <th translate>Sent central Desk manager</th>
+            <th translate>Sent Central Office Desk Manager</th>
+            <th translate>Sent central cashier</th>
+            <th translate>Sent central record officer</th>
+            <th translate>Sent Customer</th>
+            <th translate>Date</th>
+            <th translate>Service Name</th>
+            <th translate>Name (EN)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of paginatedMyTaskReport">
+            <td>{{ record.full_Name }}</td>
+            <td>{{ record.userName }}</td>
+            <td>{{ record.sent_to_Citizen }}</td>
+            <td>{{ record.sent_central_Information_manager }}</td>
+            <td>{{ record.sent_central_Document_verifier }}</td>
+            <td>{{ record.sent_central_Technical_officer }}</td>
+            <td>{{ record.sent_central_Team_leader }}</td>
+            <td>{{ record.sent_central_Basemap_officer }}</td>
+            <td>{{ record.sent_central_Desk_manager }}</td>
+            <td>{{ record.sent_Central_Office_Desk_Manager }}</td>
+            <td>{{ record.sent_central_cashier }}</td>
+            <td>{{ record.sent_central_record_officer }}</td>
+            <td>{{ record.sent_Customer }}</td>
+            <td>{{ record.date | date:'yyyy-MM-dd' }}</td>
+            <td>{{ record.serviceName }}</td>
+            <td>{{ record.name_en }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+          <div id="pagination" class="pagination-container" >
+            <button type="button" (click)="goToFirstPage()" [disabled]="currentPage === 1" class="pagination-button">
+                <span class="pi pi-angle-double-left"></span>
+              </button>
+              <button type="button" (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="pagination-button">
+                <span class="pi pi-angle-left"></span>
+                Previous
+              </button>
+            
+            <button type="button" *ngFor="let page of pageRange"
+              [ngClass]="{'active': page === currentPage, 'pagination-button': true}" (click)="changePage(page)">
+              {{ page }}
+            </button>
+            <button type="button" (click)="goToNextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+                Next
+                <span class="pi pi-angle-right"></span>
+              </button>
+              <button type="button" (click)="goToLastPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+                <span class="pi pi-angle-double-right"></span>
+                
+              </button>
+          </div>
+     
+      </div>
+    </div>
+  </div>
+  
+          <p-dialog [style.zoom]="defaultZoomLevel" 
+          [header]="item.username" 
+          [(visible)]="showMessagepoup" 
+          [responsive]="true" 
+          [width]="900" 
+          [minY]="50"
+          [maximizable]="true" 
+          [positionTop]="250" 
+          [contentStyle]="{
+            'overflow-y': 'auto', 
+            'overflow-x': 'hidden', 
+            'max-height': '80vh',
+            'min-height':'250px'
+          }" 
+          [baseZIndex]="12000"
+        >
+                           <div class="messages-container">
+                            <div class="message-box">
+                              <textarea rows="8" class="form-control custom-background">{{ messages[currentIndex] }}</textarea>
+                          </div>
+                          
+                          <div class="message-next-prev">
+                            <button type="button" class="btn btn-light previous-btn" (click)="previous()" translate>
+                              <span class="pi pi-angle-left"></span>
+                              Previous
+                            </button>
+                            <button type="button" class="btn btn-light next-btn" (click)="next()" translate>
+                              Next
+                              <span class="pi pi-angle-right"></span>
+                            </button>
+                          </div>
+                          
+                          <div class="close-button-container">
+                            <button type="button" class="btn btn-danger" (click)="close()" translate>
+                              Close
+                            </button>
+                          </div>
+                          </div>
+        </p-dialog>

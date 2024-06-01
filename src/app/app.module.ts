@@ -30,7 +30,8 @@ import { LoadingBarService } from './loading-bar/loading-bar.service';
 import { DatepickerEthiopianDirective } from './datepicker-ethiopian.directive';
 // import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { NgxCaptureModule } from 'ngx-capture';
-import { ApplicationStatusComponent } from './application-status/application-status.component';
+// import { ApplicationStatusComponent } from './application-status/application-status.component';
+import { MyTaskReportComponent } from './my-task-report/my-task-report.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ApplicationStatusComponent } from './application-status/application-sta
     LoadingBarComponent,
     DatepickerEthiopianDirective,
     // UserRegistrationComponent,
-    ApplicationStatusComponent
+    // MyTaskReportComponent,
+    MyTaskReportComponent
     
   ],
   imports: [

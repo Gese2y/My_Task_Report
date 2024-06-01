@@ -10,7 +10,7 @@ export const environment = {
   rootpath3: window["rootpath3"],
   subcity:window["subcity"],
   lang:window["lang"],
-  username: "AR_Record_Mgr",
+  username: "LemaA",
   phisicalPath: "./assets/i18n/",
   imagepathclock: window["_imagepathclock"],
   imagepath: window["_imagepath"],

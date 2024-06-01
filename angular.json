@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Applicaion_Status": {
+    "My_Task_Report": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Applicaion_Status",
+            "outputPath": "dist/My_Task_Report",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Applicaion_Status:build"
+            "browserTarget": "My_Task_Report:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Applicaion_Status:build:production"
+              "browserTarget": "My_Task_Report:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Applicaion_Status:build"
+            "browserTarget": "My_Task_Report:build"
           }
         },
         "test": {
@@ -120,15 +120,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Applicaion_Status:serve"
+            "devServerTarget": "My_Task_Report:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Applicaion_Status:serve:production"
+              "devServerTarget": "My_Task_Report:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "Applicaion_Status"
+  "defaultProject": "My_Task_Report"
 }
